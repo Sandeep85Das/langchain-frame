@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "langchain-frame"
+version = "0.1.0"
+description = "LangChain tools for Frame: scan code for vulnerabilities and check that a fix removed them"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Sandeep Das" }]
+keywords = ["langchain", "frame", "security", "sast", "static-analysis", "tools", "agents"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Typing :: Typed",
+]
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "langchain-core>=1.0.0,<2.0.0",
+    "frame-security[scan]>=1.1.0,<2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Sandeep85Das/langchain-frame"
+Documentation = "https://github.com/Sandeep85Das/langchain-frame#readme"
+"Source Code" = "https://github.com/Sandeep85Das/langchain-frame"
+repository = "https://github.com/Sandeep85Das/langchain-frame"
+Frame = "https://github.com/lambdasec/frame"
+
+[dependency-groups]
+test = [
+    "pytest>=8.0.0,<9.0.0",
+    "pytest-asyncio>=0.23.2,<1.0.0",
+    "pytest-socket>=0.7.0,<1.0.0",
+    "langchain-tests>=1.0.0,<2.0.0",
+]
+lint = ["ruff>=0.5"]
+typing = ["mypy>=1.10,<2.0"]
+
+[tool.hatch.build.targets.sdist]
+include = ["langchain_frame", "tests", "README.md", "LICENSE"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "T201"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers --strict-config --durations=5"
+markers = ["compile: placeholder used to compile integration tests without running them"]
+asyncio_mode = "auto"
